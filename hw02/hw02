@@ -1,0 +1,548 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{misccorr}
+\usepackage[noadjust]{cite}
+\usepackage{cmap}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{geometry}
+\usepackage{bm}
+\usepackage{esint}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{diagbox}
+\usepackage[table]{xcolor}
+\usepackage{color}
+\usepackage[most]{tcolorbox}
+\usepackage{pstricks}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+\usepackage{karnaugh-map}
+ 
+ 
+\definecolor{cambridgeblue}{rgb}{0.64, 0.76, 0.68}
+\lstset{basicstyle=\fontsize{10}{10}\selectfont,breaklines=true}
+ 
+\newcommand{\specchapter}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\specsection}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+\newcommand{\specsubsection}[1]{\subsection*{#1}\addcontentsline{toc}{subsection}{#1}}
+\newcommand{\RNumb}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\newcommand{\jj}{\righthyphenmin=20 \justifying}
+ 
+ 
+% геометрия
+\geometry{pdftex, left = 1.5cm, right = 1.5cm, top = 2cm, bottom = 2cm}
+ 
+\setcounter{tocdepth}{4} % фикс переноса
+\righthyphenmin = 2
+\tolerance = 2048
+ 
+\begin{document}
+\thispagestyle{empty}
+""\\\\\\\\\\\\\\\\\\\\\\\\
+ 
+\begin{center}
+    \begin{minipage}{0.5\textwidth}
+    \noindent\large\textbf{Домашнее задание №2}\newline
+    \noindent\large\textbf{<<Логика и Теория Алгоритмов>>}\newline\newline\newline
+    \noindent\large\text{Саркисов Артём}\newline
+    \noindent\large\text{ИУ7-43Б}\newline
+    \noindent\large\text{Вариант №19}\newline
+    \end{minipage}
+\end{center}
+ 
+\begin{center}
+    \vfill
+    Москва~---~\the\year
+    ~г.
+\end{center}
+\clearpage
+ 
+% Задание №1
+\noindent\textbf{Задание №1}\newline
+Задана булева функция $f = (1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1)$.\\
+\begin{center}
+    \begin{tabular}{ |c|c|c|c|c| }
+    \hline
+    x1 & x2 & x3 & x4 & $f$  \\
+    0 & 0 & 0 & 0 & 1  \\
+    0 & 0 & 0 & 1 & 1  \\
+    0 & 0 & 1 & 0 & 1  \\
+    0 & 0 & 1 & 1 & 0  \\
+    0 & 1 & 0 & 0 & 0  \\
+    0 & 1 & 0 & 1 & 1  \\
+    0 & 1 & 1 & 0 & 0  \\
+    0 & 1 & 1 & 1 & 1  \\
+    1 & 0 & 0 & 0 & 1  \\
+    1 & 0 & 0 & 1 & 0  \\
+    1 & 0 & 1 & 0 & 1  \\
+    1 & 0 & 1 & 1 & 0  \\
+    1 & 1 & 0 & 0 & 0  \\
+    1 & 1 & 0 & 1 & 0  \\
+    1 & 1 & 1 & 0 & 1  \\
+    1 & 1 & 1 & 1 & 1  \\
+    \hline
+    \end{tabular}
+\end{center}
+ 
+""\newline
+\noindent\textbf{а) найти сокращенную ДНФ\\}
+\noindent Составим карту Карно для данной функции:
+ 
+% Дефолтная карта Карно
+\begin{center}
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & 1 & 1 & 0 & 1 \\\hline
+    01 & 0 & 1 & 1 & 0 \\ \hline
+    11 & 0 & 0 & 1 & 1 \\ \hline
+    10 & 1 & 0 & 0 & 1\\ \hline
+    \end{tabular}
+\end{center}
+ 
+""\newline
+Перечислим все импликанты:
+ 
+\begin{center}
+    ""\newline
+    Импликанта №1:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & \cellcolor{orange} 1 & 1 & 0 & \cellcolor{orange} 1 \\\hline
+    01 & 0 & 1 & 1 & 0 \\ \hline
+    11 & 0 & 0 & 1 & 1 \\ \hline
+    10 & \cellcolor{orange} 1 & 0 & 0 & \cellcolor{orange} 1\\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{1} = \overline x_{2} \overline x_{4}$
+ 
+ 
+ 
+    ""\newline\newline
+    Импликанта №2:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & \cellcolor{orange} 1 & \cellcolor{orange} 1 & 0 & 1 \\\hline
+    01 & 0 & 1 & 1 & 0 \\ \hline
+    11 & 0 & 0 & 1 & 1 \\ \hline
+    10 & 1 & 0 & 0 & 1 \\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{2} = \overline x_{1} \overline x_{2} \overline x_{3}$
+   
+   
+   
+   ""\newline
+    Импликанта №3:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & 1 & \cellcolor{orange} 1 & 0 & 1 \\\hline
+    01 & 0 & \cellcolor{orange} 1 & 1 & 0 \\ \hline
+    11 & 0 & 0 & 1 & 1 \\ \hline
+    10 & 1 & 0 & 0 & 1\\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{3} = \overline x_{1} \overline x_{3} x_{4}$
+   
+   
+   
+    ""\newline\newline
+    Импликанта №4:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & 1 & 1 & 0 & 1 \\\hline
+    01 & 0 & \cellcolor{orange} 1 & \cellcolor{orange} 1 & 0 \\ \hline
+    11 & 0 & 0 & 1 & 1 \\ \hline
+    10 & 1 & 0 & 0 & 1 \\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{4} = \overline x_{1} x_{2} x_{4}$
+   
+   
+   
+    ""\newline\newline
+    Импликанта №5:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & 1 & 1 & 0 & 1 \\\hline
+    01 & 0 & 1 & \cellcolor{orange} 1 & 0 \\ \hline
+    11 & 0 & 0 & \cellcolor{orange} 1 & 1 \\ \hline
+    10 & 1 & 0 & 0 & 1 \\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{5} = x_{2} x_{3} x_{4}$
+       
+   
+   
+    ""\newline\newline
+    Импликанта №6:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & 1 & 1 & 0 & 1 \\\hline
+    01 & 0 & 1 & 1 & 0 \\ \hline
+    11 & 0 & 0 & \cellcolor{orange} 1 & \cellcolor{orange} 1 \\ \hline
+    10 & 1 & 0 & 0 & 1 \\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{6} = x_{1} x_{2} x_{3}$
+       
+   
+   
+    ""\newline\newline
+    Импликанта №7:
+   
+    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
+    \hline
+    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
+    00 & 1 & 1 & 0 & 1 \\\hline
+    01 & 0 & 1 & 1 & 0 \\ \hline
+    11 & 0 & 0 & 1 & \cellcolor{orange} 1 \\ \hline
+    10 & 1 & 0 & 0 & \cellcolor{orange} 1 \\ \hline
+    \end{tabular}
+   
+    ""\newline
+    $K_{7} = x_{1} x_{3} \overline x_{4}$
+   
+   
+\end{center}
+ 
+% Сокращенная ДНФ
+\noindent Сокращенная ДНФ:
+$$ K_{1} \vee K_{2} \vee K_{3} \vee K_{4} \vee K_{5} \vee K_{6} \vee K_{7}  = \overline x_{2} \overline x_{4} \vee
+\overline x_{1} \overline x_{2} \overline x_{3} \vee
+\overline x_{1} \overline x_{3} x_{4} \vee
+\overline x_{1} x_{2} x_{4} \vee
+x_{2} x_{3} x_{4} \vee
+x_{1} x_{2} x_{3} \vee
+x_{1} x_{3} \overline x_{4}$$
+""\newline\newline
+\noindent\textbf{б) Найти ядро функции.}
+""\newline\newline
+\noindentЯдровая импликанта: $K_{1} = \overline x_{2} \overline x_{4}$, т.к. на карте Карно элементарные конъюнкции $x_{1} \overline x_{2} \overline x_{3} \overline x_{4}$ и $\overline x_{1} \overline x_{2} x_{3} \overline x_{4}$ покрыты только этой импликантой.Следовательно, ядро: $K_{1} \overline x_{2} \overline x_{4}.$
+ 
+ 
+""\newline 
+\noindent\textbf{в) Получить все тупиковые ДНФ и указать, какие из них являются минимальными.}
+""\newline\newline 
+\noindent $(K_{2} \vee K_{3})(K_{3} \vee K_{4})(K_{4} \vee K_{5})(K_{5} \vee K_{6})(K_{6} \vee K_{7}) = (K_{2}K_{3} \vee K_{2}K_{4} \vee K_{3}K_{4} \vee K_{3})(K_{4}K_{5} \vee K_{4}K_{6} \vee K_{5}K_{6} \vee K_{5})(K_{6} \vee K_{7}) = (K_{2}K_{4} \vee K_{3})(K_{4}K_{6} \vee K_{5})(K_{6} \vee K_{7}) = (K_{2}K_{4}K_{6} \vee K_{2}K_{4}K_{5} \vee K_{3}K_{4}K_{6} \vee K_{3}K_{5})(K_{6} \vee K_{7}) = K_{2}K_{4}K_{6} \vee K_{2}K_{4}K_{5}K_{6} \vee K_{3}K_{4}K_{6} \vee K_{3}K_{5}K_{6} \vee K_{2}K_{4}K_{6}K_{7} \vee K_{2}K_{4}K_{5}K_{7} \vee K_{3}K_{4}K_{6}K_{7} \vee K_{3}K_{5}K_{7} = K_{2}K_{4}K_{6} \vee K_{3}K_{4}K_{6} \vee K_{3}K_{5}K_{6} \vee K_{3}K_{5}K_{7} \vee K_{2}K_{4}K_{5}K_{7}$
+""\newline\newline
+\noindentПрисоединяем ядровую импликанту K1 к каждому полученному члену и
+получаем 5 тупиковых ДНФ:
+""\newline\newline
+\noindent$K_{1}K_{2}K_{4}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
+\newline
+\noindent$K_{1}K_{3}K_{4}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
+\newline
+\noindent$K_{1}K_{3}K_{5}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{2} x_{3}$
+\newline
+\noindent$K_{1}K_{3}K_{5}K_{7} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
+\newline
+\noindent$K_{1}K_{2}K_{4}K_{5}K_{7} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
+""\newline\newline
+\noindentПервые четыре ДНФ состоят из четырёх элементарных конъюнкций, а последняя – из пяти. Следовательно, кратчайшими будут первые четыре ДНФ.
+Все они состоят из одинакового числа литералов. Следовательно, все они являются минимальными.
+ 
+""\newline  
+\noindent\textbf{г) На картах Карно указать ядро и покрытия, соответствующие минимальным ДНФ.}
+
+""\newline
+\noindentКарта Карно для минимальной ДНФ: $K_{1}K_{2}K_{4}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
+\begin{center}
+\begin{karnaugh-map}[4][4][1][$X_3X_4$][$X_1X_2$]
+    \manualterms{1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1}
+    \implicant{0}{1}
+    \implicant{5}{7}
+    \implicant{15}{14}
+    \implicantcorner
+\end{karnaugh-map}
+\end{center}
+
+""\newline\newline\newline\newline\newline\newline
+\noindentКарта Карно для минимальной ДНФ: $K_{1}K_{3}K_{4}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
+\begin{center}
+\begin{karnaugh-map}[4][4][1][$X_3X_4$][$X_1X_2$]
+    \manualterms{1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1}
+    \implicant{1}{5}
+    \implicant{5}{7}
+    \implicant{15}{14}
+    \implicantcorner
+\end{karnaugh-map}
+\end{center}
+    
+""\newline\newline
+\noindentКарта Карно для минимальной ДНФ: $K_{1}K_{3}K_{5}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{2} x_{3}$
+\begin{center}
+\begin{karnaugh-map}[4][4][1][$X_3X_4$][$X_1X_2$]
+    \manualterms{1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1}
+    \implicant{1}{5}
+    \implicant{7}{15}
+    \implicant{15}{14}
+    \implicantcorner
+\end{karnaugh-map}
+\end{center}
+    
+""\newline\newline\newline
+\noindentКарта Карно для минимальной ДНФ: $K_{1}K_{3}K_{5}K_{7} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
+\begin{center}
+\begin{karnaugh-map}[4][4][1][$X_3X_4$][$X_1X_2$]
+    \manualterms{1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1}
+    \implicant{1}{5}
+    \implicant{7}{15}
+    \implicant{14}{10}
+    \implicantcorner
+\end{karnaugh-map}
+\end{center}
+
+ 
+ % Задание №2
+""\newline
+\noindent\textbf{Задание №2}
+""\newline\newline
+\noindentДаны функции $f$ и $w$: 
+\begin{center}
+    \begin{tabular}{| c | c |} 
+        \hline
+        $f$ & $w$ \\ [0.5ex] 
+        \hline
+        $((\overline x_1 \vee x_2 \vee x_3)\Rightarrow(\overline x_2 \sim x_3)) \sim (x_1 \sim \overline x_3)$ & $(1, 1, 1, 1, 1, 1, 0, 0)$ \\ 
+        \hline
+    \end{tabular}
+\end{center}
+
+""\newline
+\noindent\textbf{а) Вычислить таблицу значений функции $f$.}
+""\newline\newline
+\noindentТаблица значений функции $f$:
+\begin{center}
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c |} 
+        \hline
+        $x_1$ & $x_2$ & $x_3$ & $\overline x_1$ & $\overline x_2$ & $\overline x_3$ & $(\overline x_1 \vee x_2 \vee x_3)$ & $\overline x_2 \sim x_3$ & $(\overline x_1 \vee x_2 \vee x_3) \Rightarrow (\overline x_2 \sim x_3)$ & $x_1 \sim \overline x_3$ & $f$\\ [0.5ex] 
+        \hline
+        0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 1\\ 
+        \hline
+        0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1\\
+        \hline
+        0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 0 & 0\\
+        \hline
+        0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0\\
+        \hline
+        1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 1\\
+        \hline
+        1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 0\\
+        \hline
+        1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1\\
+        \hline
+        1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1\\
+        \hline
+    \end{tabular}
+\end{center}
+
+""\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline
+\noindent\textbf{б) Найти минимальные ДНФ функций $f$ и $w$.}
+""\newline\newline
+\noindentКарта Карно функции $f$:
+\begin{center}
+    \begin{karnaugh-map}[4][2][1][$X_1X_2$][$X_3$]
+        \manualterms{1, 0, 1, 1, 1, 0, 0, 1}
+        \implicant{3}{7}
+        \implicant{0}{4}
+        \implicant{3}{2}
+        \implicantedge{0}{0}{2}{2}
+    \end{karnaugh-map}
+\end{center}
+\noindent$K_1 = x_1x_2$ $K_2 = \overline x_1 \overline x_2$ $K_3 = x_1 \overline x_3$ $K_4 = \overline x_2 \overline x_3$
+""\newline\newline
+\noindent$K_1$ и $K_2$ - ядровые импликанты, т.к на карте Карно элементарные конъюнкции $\overline x_1 \overlins x_2 x_3$ и $ x_1  x_2 x_3$ покрыты только этими импликантами. 
+""\newline\newline
+\noindentМинимальная ДНФ функции $f$: $K_3K_1K_2 = x_1 \overline x_3 \vee x_1x_2 \vee \overline x_1 \overline x_2$ и $K_4K_1K_2 = \overline x_2 \overline x_3 \vee x_1x_2 \vee \overline x_1 \overline x_2$ - тупиковые ДНФ функции $f$, в свою очередь являются и минимальными, т.к имеет одинаково наименьшую сложность. 
+""\newline\newline
+\noindentКарта Карно функции $w$:
+\begin{center}
+    \begin{tabular}{| c | c | c | c |} 
+        \hline
+        $x_1$ & $x_2$ & $x_3$ & $w$ \\ [0.5ex] 
+        \hline
+        0 & 0 & 0 & 1 \\ 
+        \hline
+        0 & 0 & 1 & 1 \\ 
+        \hline
+        0 & 1 & 0 & 1 \\ 
+        \hline
+        0 & 1 & 1 & 1 \\ 
+        \hline
+        1 & 0 & 0 & 1 \\ 
+        \hline
+        1 & 0 & 1 & 1 \\ 
+        \hline
+        1 & 1 & 0 & 0 \\ 
+        \hline
+        1 & 1 & 1 & 0 \\ 
+        \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \begin{karnaugh-map}[4][2][1][$X_1X_2$][$X_3$]
+        \manualterms{1, 1, 1, 0, 1, 1, 1, 0}
+        \implicant{0}{5}
+        \implicantedge{0}{4}{2}{6}
+    \end{karnaugh-map}
+\end{center}
+\noindent$K_1 = \overline x_1$ $K_2 = \overline x_2$
+""\newline\newline
+\noindentМинимальная ДНФ функции $w$: $w = \overline x_1 \vee \overline x_2$ 
+""\newline\newline\newline
+\noindent\textbf{в) Выяснить полноту системы $\{f, w\}$. Если система не полна, дополнить систему функцией $g$ до полной системы.}
+\begin{center}
+    \begin{tabular}{| c | c | c | c | c |} 
+        \hline
+        $x_1$ & $x_2$ & $x_3$ & $f$ & $w$ \\ [0.5ex] 
+        \hline
+        0 & 0 & 0 & 1 & 1 \\ 
+        \hline
+        0 & 0 & 1 & 1 & 1 \\ 
+        \hline
+        0 & 1 & 0 & 0 & 1 \\ 
+        \hline
+        0 & 1 & 1 & 0 & 1 \\ 
+        \hline
+        1 & 0 & 0 & 1 & 1 \\ 
+        \hline
+        1 & 0 & 1 & 0 & 1 \\ 
+        \hline
+        1 & 1 & 0 & 1 & 0 \\ 
+        \hline
+        1 & 1 & 1 & 1 & 0 \\ 
+        \hline
+    \end{tabular}
+\end{center}
+""\newline\newline
+\noindentСохранение 0: $f(0, 0, 0) = 1 \Rightarrow f \notin T_0$ и $w(0, 0, 0) = 1 \Rightarrow w \notin T_0$
+""\newline\newline
+\noindentСохранение 1: $f(1, 1, 1) = 1 \Rightarrow f \in T_1$ и $w(1, 1, 1) = 0 \Rightarrow w \notin T_1$
+""\newline\newline
+\noindentСамодвойственность: $f(1, 1, 1) = f(0, 0, 0) = 1 \Rightarrow f \notin S$ и $w(1, 0, 1) = w(0, 1, 0) = 1 \Rightarrow w \notin S$
+""\newline\newline
+\noindentМонотонность: $(0, 0, 0) < (0, 1, 0)$, но $f(0, 0, 0) > f(0, 1, 0) \Rightarrow f \notin M$ и $(0, 0, 0) < (1, 1, 0)$, но $w(0, 0, 0) > w(1, 1, 0) \Rightarrow w \notin M$
+""\newline\newline
+\noindentЛинейность функции: общий вид полинома Жигалкина для функции трёх переменных: $f(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \oplus a_{13}x_1x_3 \oplus a_1x_1 \oplus a_2x_2 \oplus a_3x_3 \oplus a_0$
+\begin{center}
+    \begin{tabular}{| c | c | c | c | c |} 
+        \hline
+        $x_1$ & $x_2$ & $x_3$ & $f$ & "" \\ [0.5ex] 
+        \hline
+        0 & 0 & 0 & 1 & $a_0 = 1$ \\ 
+        \hline
+        0 & 0 & 1 & 1 & $a_0 + a_3 = 1 \Rightarrow a_3 = 0$ \\ 
+        \hline
+        0 & 1 & 0 & 0 & $a_0 + a_2 = 0 \Rightarrow a_2 = 1$ \\ 
+        \hline
+        0 & 1 & 1 & 0 & $a_0 + a_{23} + a_2 + a_3 = 0 \Rightarrow a_{23} = 0$ \\ 
+        \hline
+        1 & 0 & 0 & 1 & $a_0 + a_1 = 1 \Rightarrow a_1 = 0$ \\ 
+        \hline
+        1 & 0 & 1 & 0 & $a_0 + a_{13} + a_1 + a_3 = 0 \Rightarrow a_{13} = 1$ \\ 
+        \hline
+        1 & 1 & 0 & 1 & $a_0 + a_{12} + a_1 + a_2 = 1 \Rightarrow a_{12} = 1$ \\ 
+        \hline
+        1 & 1 & 1 & 1 & $a_0 + a_{123} + a_{12} + + a_{13} + a_{23} + a_1 + a_2 + a_3 = 1 \Rightarrow a_{123} = 1$ \\ 
+        \hline
+    \end{tabular}
+\end{center}
+\noindentПолином Жигалкина функции $f$: $f(x_1, x_2, x_3) = x_1x_2x_3 + x_1x_2 + x_1x_3 + x_2 + 1$, т.к. полином функции $f$ не является полиномом первой степени, то $f \notin L$
+
+""\newline
+$w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \oplus a_{13}x_1x_3 \oplus a_1x_1 \oplus a_2x_2 \oplus a_3x_3 \oplus a_0$
+\begin{center}
+    \begin{tabular}{| c | c | c | c | c |} 
+        \hline
+        $x_1$ & $x_2$ & $x_3$ & $w$ & "" \\ [0.5ex] 
+        \hline
+        0 & 0 & 0 & 1 & $a_0 = 1$ \\ 
+        \hline
+        0 & 0 & 1 & 1 & $a_0 + a_3 = 1 \Rightarrow a_3 = 0$ \\ 
+        \hline
+        0 & 1 & 0 & 1 & $a_0 + a_2 = 1 \Rightarrow a_2 = 0$ \\ 
+        \hline
+        0 & 1 & 1 & 1 & $a_0 + a_{23} + a_2 + a_3 = 1 \Rightarrow a_{23} = 0$ \\ 
+        \hline
+        1 & 0 & 0 & 1 & $a_0 + a_1 = 1 \Rightarrow a_1 = 0$ \\ 
+        \hline
+        1 & 0 & 1 & 1 & $a_0 + a_{13} + a_1 + a_3 = 1 \Rightarrow a_{13} = 0$ \\ 
+        \hline
+        1 & 1 & 0 & 0 & $a_0 + a_{12} + a_1 + a_2 = 0 \Rightarrow a_{12} = 1$ \\ 
+        \hline
+        1 & 1 & 1 & 0 & $a_0 + a_{123} + a_{12} + + a_{13} + a_{23} + a_1 + a_2 + a_3 = 0 \Rightarrow a_{123} = 0$ \\ 
+        \hline
+    \end{tabular}
+\end{center}
+\noindentПолином Жигалкина функции $w$: $w(x_1, x_2, x_3) = x_1x_2 + 1$, т.к. полином функции $w$ не является полиномом первой степени, то $w \notin L$
+
+""\newline\newline
+\noindentКритериальная таблица:
+\begin{center}
+    \begin{tabular}{| c | c | c | c | c | c |} 
+        \hline
+        "" & $T_0$ & $T_1$ & $S$ & $M$ & $L$\\ [0.5ex] 
+        \hline
+        $f$ & $-$ & $+$ & $-$ & $-$ & $-$ \\ 
+        \hline
+        $w$ & $-$ & $-$ & $-$ & $-$ & $-$ \\ 
+        \hline
+    \end{tabular}
+\end{center}
+\noindentСистема $\{f, w\}$ является функционально полным классом, т.к. функция $w$ не сохраняет константу 1, которую сохраняет функция $f$. 
+""\newline\newline
+\noindent\textbf{г) Из функциональных элементов, реализующих функии полной системы $\{f, w\}$, построить функциональные элементы, реализующие базовые функции ($\vee, \wedge, \space, 0, 1$).}
+""\newline\newline
+\noindentСистема $\{f, w\}$ является функционально полным классом. Значит, из этих функций с помощью суперпозиций можно выразить константы 0, 1, отрицание, конъюнкцию и дизъюнкцию.
+""\newline\newline
+\noindentОтрицание: $w \notin T_0$ и $w \notin T_1$ $\Rightarrow$ отрицанием строим из функции $w$, т.к. $w(0, 0, 0) = 1$ и $w(1, 1, 1) = 0$, то $w(x, x, x) = \overline x$.
+""\newline\newline
+\noindentКонстанта 1: $f \notin T_0$ и $f \in T_1$ $\Rightarrow$ константу 1 строим из функции $f$, т.к. $f(0, 0, 0) = 1$ и $f(1, 1, 1) = 1$, то $f(x, x, x) = 1$.
+""\newline\newline
+\noindentКонстанта 0: Для построения константы 0 возьмём отрицание от функции $f(x, x, x)$. $\overline{f(x, x, x)} = w(f(x, x, x), f(x, x, x), f(x, x, x)) = 0$. Проверка: $w(f(0, 0, 0), f(0, 0, 0), f(0, 0, 0)) = w(1, 1, 1) = 0$ и $w(f(1, 1, 1), f(1, 1, 1), f(1, 1, 1)) = w(1, 1, 1) = 0$.
+""\newline\newline
+\noindentДизъюнкция: для построения дизъюнкции из функции $f = x_1 \overline x_3 \vee x_1x_2 \vee \overline x_1 \overline x_2$, зафиксируем переменную $x_1 = 1$ и обозначим $x_2 \rightarrow x$ и $\overline x_3 \rightarrow y$. Тогда: $f(1, x, \overline y) = x \vee y$. Выражение для дизъюнкции: $d(x, y) = f(1, x, \overline y) = f(f(x, x, x), x, \overline y) = x \vee y$.
+\newline\newline
+\noindentПроверка: $d(0, 0) = f(f(0, 0, 0), 0, 1) = f(1, 0, 1) = 0$, $d(0, 1) = f(f(0, 0, 0), 0, 0) = f(1, 0, 0) = 1$, $d(1, 0) = f(f(1, 1, 1), 1, 1) = f(1, 1, 1) = 1$, $d(1, 1) = f(f(1, 1, 1), 1, 0) = f(1, 1, 0) = 1$.
+""\newline\newline
+\noindentКонъюнкция: для построения конъюнкции из функции $w = \overline x_1 \vee \overline x_2$, пусть $x_1 = 1$, обозначим $\overline x_2 \rightarrow x y$. Тогда: $w(1, \overline{x y}, 0) = x y$. Выражение для конъюнкции: $k(x, y) = w(1, \overline{x y}, 0) = w(f(x, x, x), \overline{x y}, w(f(x, x, x), f(x, x, x), f(x, x, x))) = x y$.
+\newline\newline 
+\noindentПроверка: $k(0, 0) = w(1, 1, w(1, 1, 1)) = w(1, 1, 0) = 0$, $k(0, 1) = w(1, 1, w(1, 1, 1)) = w(1, 1, 0) = 0$, $k(1, 0) = w(1, 1, w(1, 1, 1) = w(1, 1, 0) = 0$, $k(1, 1) = w(1, 0, w(1, 1, 1)) = w(1, 0, 0) = 1$.
+
+
+
+
+
+ 
+\end{document}
