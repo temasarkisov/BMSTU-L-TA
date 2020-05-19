@@ -542,6 +542,88 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
 
 
 
+% Задание №3
+""\newline\newline
+\noindent\textbf{Задание №3}
+""\newline\newline
+\noindentДоказать в исчислении высказываний (буквы обозначают произовльные формулы): 
+""\newline
+\noindent$\neg(\neg(\neg B \vee C) \rightarrow (\neg A \vee C)) \equiv (A \& (B \& \neg C))$.
+""\newline\newline
+\noindentПреобразуем исходное высказывание: $\neg(\neg(B \rightarrow C) \rightarrow (A \rightarrow C)) \equiv (A \& (B \& \neg C))$.
+""\newline\newline
+\noindentСначала докажем правило отрицания импликации: $\neg (A \rightarrow B) \vdash A \& \neg B$. Т.к. в левой части стоит внешнее отрицание и ее не удобно использовать в качестве гипотезы, по прибегнем к контрапозиции, то есть выведем отрицание левой части из отрицания правой: $\neg (A \& \neg B) \vdash \neg \neg (A \rightarrow B)$.
+\begin{center}
+    \begin{tabular}{| c | c | c |} 
+        \hline
+        Шаг & Формула & Комментарий \\ [0.5ex] 
+        \hline
+        $1$ & $\neg (A \& \neg B)$ & Гипотеза \\ [0.5ex] 
+        \hline
+        $2$ & $\neg \neg (A \rightarrow \neg \neg B)$ & По определени $\&$ \\ [0.5ex] 
+        \hline
+        $3$ & $A \rightarrow \neg \neg B$ & $R3 (2)$ \\ [0.5ex] 
+        \hline
+        $4$ & $\neg \neg B \rightarrow B$ & Секвенция 3 \\ [0.5ex] 
+        \hline
+        $5$ & $A \rightarrow B$ & $R1 (2) (4)$ \\ [0.5ex] 
+        \hline
+        $6$ & $\neg \neg (A \rightarrow B)$ & $R4 (5)$ \\ [0.5ex] 
+        \hline
+    \end{tabular}
+\end{center}
+\noindentОбозначим правило отрицание импликации - $R10$.
+\begin{center}
+    \begin{tabular}{| c | c | c |} 
+        \hline
+        Шаг & Формула & Комментарий \\ [0.5ex] 
+        \hline
+        $1$ & $\neg(\neg(B \rightarrow C) \rightarrow (A \rightarrow C))$ & Гипотеза \\ [0.5ex] 
+        \hline
+        $2$ & $\neg (B \rightarrow C) \& \neg (A \rightarrow C)$ & Правило Де Моргана (отрицание дизъюнкции) \\ [0.5ex] 
+        \hline
+        $3$ & $\neg (B \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
+        \hline
+        $4$ & $\neg (A \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
+        \hline
+        $5$ & $B \& \neg C$ & $R10 (3)$ \\ [0.5ex] 
+        \hline
+        $6$ & $A \& \neg C$ & $R10 (4)$ \\ [0.5ex] 
+        \hline
+        $7$ & $\neg C$ & Свойство конъюнкции (6) \\ [0.5ex] 
+        \hline
+        $8$ & $(A \& (B \& \neg C))$ & Свойство конъюнкции (5) и (7) \\ [0.5ex] 
+        \hline
+    \end{tabular}
+\end{center}
+\noindentДокажем выводимость левой части из правой. Заметим, что из секвенции 8, следует: $\vdash A \rightarrow (\neg B \rightarrow \neg (A \rightarrow B))$. По теореме дедукции имеем: $A, \neg B \vdash \neg (A \rightarrow B)$.
+\begin{center}
+    \begin{tabular}{| c | c | c |} 
+        \hline
+        Шаг & Формула & Комментарий \\ [0.5ex] 
+        \hline
+        $1$ & $(A \& (B \& \neg C))$ & Гипотеза \\ [0.5ex]
+        \hline
+        $2$ & $A$ & Свойство конъюнкции (1) \\ [0.5ex]
+        \hline
+        $3$ & $B \& \neg C$ & Свойство конъюнкции (1) \\ [0.5ex]
+        \hline
+        $4$ & $B$ & Свойство конъюнкции (3) \\ [0.5ex]
+        \hline
+        $5$ & $\neg C$ & Свойство конъюнкции (3) \\ [0.5ex]
+        \hline
+        $6$ & $\neg C \& A$ & Свойство конъюнкции (3) и (5) \\ [0.5ex]
+        \hline
+        $7$ & $\neg (B \rightarrow C)$ & $R8 (4, 5)$) \\ [0.5ex]
+        \hline
+        $8$ & $\neg (A \rightarrow C)$ & $R10 (6)$) \\ [0.5ex]
+        \hline
+        $9$ & $\neg (B \rightarrow C) \& \neg (A \rightarrow C)$ & Свойство конъюнкции (7) и (8) \\ [0.5ex]
+        \hline
+        $10$ & $\neg(\neg(B \rightarrow C) \rightarrow (A \rightarrow C))$ & $R10(9)$ \\ [0.5ex]
+        \hline
+    \end{tabular}
+\end{center}
 
 
  
