@@ -552,7 +552,7 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
 ""\newline
 \noindent$\neg(\neg(\neg B \vee C) \rightarrow (\neg A \vee C)) \equiv (A \& (B \& \neg C))$.
 ""\newline\newline
-\noindentПреобразуем исходное высказывание: $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (A \rightarrow C)) \equiv (A \& (B \& \neg C))$.
+\noindentПреобразуем исходное высказывание: $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (\neg \neg A \rightarrow C)) \equiv (A \& (B \& \neg C))$.
 ""\newline\newline
 \noindentСначала докажем правило отрицания импликации: $\neg (A \rightarrow B) \vdash A \& \neg B$. Т.к. в левой части стоит внешнее отрицание и ее не удобно использовать в качестве гипотезы, по прибегнем к контрапозиции, то есть выведем отрицание левой части из отрицания правой: $\neg (A \& \neg B) \vdash \neg \neg (A \rightarrow B)$.
 \begin{center}
@@ -580,27 +580,35 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
         \hline
         Шаг & Формула & Комментарий \\ [0.5ex] 
         \hline
-        $1$ & $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (A \rightarrow C))$ & Гипотеза \\ [0.5ex] 
+        $1$ & $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (\neg \neg A \rightarrow C))$ & Гипотеза \\ [0.5ex] 
         \hline
-        $2$ & $\neg (\neg \neg B \rightarrow C) \& \neg (A \rightarrow C)$ & Правило Де Моргана (отрицание дизъюнкции) \\ [0.5ex] 
+        $2$ & $\neg (\neg \neg B \rightarrow C) \& \neg (\neg \neg A \rightarrow C)$ & Правило Де Моргана (отрицание дизъюнкции) \\ [0.5ex] 
         \hline
-        $3$ & $\neg (\neg \neg B \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
+        $3$ & $\neg (\neg \neg B \rightarrow C)$ & Свойство "распаковки" конъюнкции (2) \\ [0.5ex] 
         \hline
-        $4$ & $\neg (A \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
+        $4$ & $\neg \neg B \& \neg C$ & $R10 (3)$ \\ [0.5ex] 
         \hline
-        $5$ & $\neg \neg B \& \neg C$ & $R10 (3)$ \\ [0.5ex] 
+        $5$ & $\neg C$ & Свойство "распаковки" конъюнкции (4) \\ [0.5ex] 
         \hline
-        $6$ & $\neg \neg B \equiv B$ & Эквивалентность $\neg A \equiv A$, где $A = B$  \\ [0.5ex] 
+        $6$ & $\neg \neg B$ & Свойство "распаковки" конъюнкции (4) \\ [0.5ex] 
         \hline
-        $7$ & $A \& \neg C$ & $R10 (4)$ \\ [0.5ex] 
+        $7$ & $B$ & $R3(6)$ \\ [0.5ex] 
         \hline
-        $8$ & $\neg C$ & Свойство конъюнкции (6) \\ [0.5ex] 
+        $8$ & $\neg (\neg \neg A \rightarrow C)$ & Свойство "распаковки" конъюнкции (2) \\ [0.5ex] 
         \hline
-        $9$ & $(A \& (B \& \neg C))$ & Свойство конъюнкции (5) и (7) \\ [0.5ex] 
+        $9$ & $\neg \neg A \& \neg C$ & $R10 (8)$ \\ [0.5ex] 
+        \hline
+        $10$ & $\neg \neg A$ & Свойство "распаковки" конъюнкции (9) \\ [0.5ex] 
+        \hline
+        $11$ & $A$ & $R3(10)$ \\ [0.5ex] 
+        \hline
+        $12$ & $B \& \neg C$ & Свойство "сборки" конъюнкции (5) (7) \\ [0.5ex] 
+        \hline
+        $13$ & $A \& (B \& \neg C)$ & Свойство "сборки" конъюнкции (11) (12) \\ [0.5ex] 
         \hline
     \end{tabular}
 \end{center}
-\noindentДокажем выводимость левой части из правой. Заметим, что из секвенции 8, следует: $\vdash A \rightarrow (\neg B \rightarrow \neg (A \rightarrow B))$. По теореме дедукции имеем: $A, \neg B \vdash \neg (A \rightarrow B)$.
+\noindentДокажем выводимость левой части из правой.
 \begin{center}
     \begin{tabular}{| c | c | c |} 
         \hline
@@ -608,28 +616,29 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
         \hline
         $1$ & $(A \& (B \& \neg C))$ & Гипотеза \\ [0.5ex]
         \hline
-        $2$ & $A$ & Свойство конъюнкции (1) \\ [0.5ex]
+        $2$ & $A$ & Свойство "распаковки" конъюнкции (1) \\ [0.5ex]
         \hline
-        $3$ & $B \& \neg C$ & Свойство конъюнкции (1) \\ [0.5ex]
+        $3$ & $\neg \neg A$ & $R4(2)$ \\ [0.5ex]
         \hline
-        $4$ & $B$ & Свойство конъюнкции (3) \\ [0.5ex]
+        $4$ & $B \& \neg C$ & Свойство "распаковки" конъюнкции (1) \\ [0.5ex]
         \hline
-        $5$ & $B \equiv \neg \neg B$ & Эквивалентность $A \equiv \neg \neg A$, где $A = B$  \\ [0.5ex]
+        $5$ & $\neg C$ & Свойство "распаковки" конъюнкции (4) \\ [0.5ex]
         \hline
-        $6$ & $\neg C$ & Свойство конъюнкции (3) \\ [0.5ex]
+        $6$ & $B$ & Свойство "распаковки" конъюнкции (4) \\ [0.5ex]
         \hline
-        $7$ & $\neg C \& A$ & Свойство конъюнкции (3) и (5) \\ [0.5ex]
+        $7$ & $\neg \neg B$ & $R4(6)$ \\ [0.5ex]
         \hline
-        $8$ & $\neg (\neg \neg B \rightarrow C)$ & $R8 (4, 5)$) \\ [0.5ex]
+        $8$ & $\neg (\neg \neg B \rightarrow C)$ & $R8 (5, 7)$ \\ [0.5ex]
         \hline
-        $9$ & $\neg (A \rightarrow C)$ & $R10 (6)$) \\ [0.5ex]
+        $9$ & $\neg (\neg \neg A \rightarrow C)$ & $R8 (3, 5)$ \\ [0.5ex]
         \hline
-        $10$ & $\neg (\neg \neg B \rightarrow C) \& \neg (A \rightarrow C)$ & Свойство конъюнкции (7) и (8) \\ [0.5ex]
+        $10$ & $\neg (\neg \neg B \rightarrow C) \& \neg (\neg \neg A \rightarrow C)$ & Свойство "сборки" конъюнкции (8) (9) \\ [0.5ex]
         \hline
-        $11$ & $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (A \rightarrow C))$ & $R10(9)$ \\ [0.5ex]
+        $11$ & $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (\neg \neg A \rightarrow C))$ & $R10(10)$ \\ [0.5ex]
         \hline
     \end{tabular}
 \end{center}
+\noindentТаким образом была доказана выводимость в обе стороны. Ч.т.д.
 
 
  
