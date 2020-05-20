@@ -100,16 +100,18 @@
 \noindent\textbf{а) найти сокращенную ДНФ\\}
 \noindent Составим карту Карно для данной функции:
  
-% Дефолтная карта Карно
+% Исходная карта Карно
 \begin{center}
-    \begin{tabular}{ | l | l | l | l | l | p{1cm} |}
-    \hline
-    \diagbox[width=5em]{$x_{1}x_{2}$}{$x_{3}x_{4}$} & 00 & 01 & 11 & 10 \\\hline
-    00 & 1 & 1 & 0 & 1 \\\hline
-    01 & 0 & 1 & 1 & 0 \\ \hline
-    11 & 0 & 0 & 1 & 1 \\ \hline
-    10 & 1 & 0 & 0 & 1\\ \hline
-    \end{tabular}
+    \begin{karnaugh-map}[4][4][1][$X_3X_4$][$X_1X_2$]
+        \manualterms{1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1}
+        \implicant{0}{1}
+        \implicant{1}{5}
+        \implicant{5}{7}
+        \implicant{7}{15}
+        \implicant{15}{14}
+        \implicant{14}{10}
+        \implicantcorner
+    \end{karnaugh-map}
 \end{center}
  
 ""\newline
@@ -259,15 +261,15 @@ x_{1} x_{3} \overline x_{4}$$
 \noindentПрисоединяем ядровую импликанту K1 к каждому полученному члену и
 получаем 5 тупиковых ДНФ:
 ""\newline\newline
-\noindent$K_{1}K_{2}K_{4}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
+\noindent$K_{1}K_{2}K_{4}K_{6} : \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
 \newline
-\noindent$K_{1}K_{3}K_{4}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
+\noindent$K_{1}K_{3}K_{4}K_{6} : \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee \overline x_{1} x_{2} x_{4} \vee x_{1} x_{2} x_{3}$
 \newline
-\noindent$K_{1}K_{3}K_{5}K_{6} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{2} x_{3}$
+\noindent$K_{1}K_{3}K_{5}K_{6} : \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{2} x_{3}$
 \newline
-\noindent$K_{1}K_{3}K_{5}K_{7} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
+\noindent$K_{1}K_{3}K_{5}K_{7} : \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{3} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
 \newline
-\noindent$K_{1}K_{2}K_{4}K_{5}K_{7} = \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
+\noindent$K_{1}K_{2}K_{4}K_{5}K_{7} : \overline x_{2} \overline x_{4} \vee \overline x_{1} \overline x_{2} \overline x_{3} \vee \overline x_{1} x_{2} x_{4} \vee x_{2} x_{3} x_{4} \vee x_{1} x_{3} \overline x_{4}$
 ""\newline\newline
 \noindentПервые четыре ДНФ состоят из четырёх элементарных конъюнкций, а последняя – из пяти. Следовательно, кратчайшими будут первые четыре ДНФ.
 Все они состоят из одинакового числа литералов. Следовательно, все они являются минимальными.
@@ -462,19 +464,19 @@ x_{1} x_{3} \overline x_{4}$$
         \hline
         0 & 0 & 0 & 1 & $a_0 = 1$ \\ 
         \hline
-        0 & 0 & 1 & 1 & $a_0 + a_3 = 1 \Rightarrow a_3 = 0$ \\ 
+        0 & 0 & 1 & 1 & $a_0 \oplus a_3 = 1 \Rightarrow a_3 = 0$ \\ 
         \hline
-        0 & 1 & 0 & 0 & $a_0 + a_2 = 0 \Rightarrow a_2 = 1$ \\ 
+        0 & 1 & 0 & 0 & $a_0 \oplus a_2 = 0 \Rightarrow a_2 = 1$ \\ 
         \hline
-        0 & 1 & 1 & 0 & $a_0 + a_{23} + a_2 + a_3 = 0 \Rightarrow a_{23} = 0$ \\ 
+        0 & 1 & 1 & 0 & $a_0 \oplus a_{23} \oplus a_2 \oplus a_3 = 0 \Rightarrow a_{23} = 0$ \\ 
         \hline
-        1 & 0 & 0 & 1 & $a_0 + a_1 = 1 \Rightarrow a_1 = 0$ \\ 
+        1 & 0 & 0 & 1 & $a_0 \oplus a_1 = 1 \Rightarrow a_1 = 0$ \\ 
         \hline
-        1 & 0 & 1 & 0 & $a_0 + a_{13} + a_1 + a_3 = 0 \Rightarrow a_{13} = 1$ \\ 
+        1 & 0 & 1 & 0 & $a_0 \oplus a_{13} \oplus a_1 \oplus a_3 = 0 \Rightarrow a_{13} = 1$ \\ 
         \hline
-        1 & 1 & 0 & 1 & $a_0 + a_{12} + a_1 + a_2 = 1 \Rightarrow a_{12} = 1$ \\ 
+        1 & 1 & 0 & 1 & $a_0 \oplus a_{12} \oplus a_1 \oplus a_2 = 1 \Rightarrow a_{12} = 1$ \\ 
         \hline
-        1 & 1 & 1 & 1 & $a_0 + a_{123} + a_{12} + + a_{13} + a_{23} + a_1 + a_2 + a_3 = 1 \Rightarrow a_{123} = 1$ \\ 
+        1 & 1 & 1 & 1 & $a_0 \oplus a_{123} \oplus a_{12} \oplus a_{13} \oplus a_{23} \oplus a_1 \oplus a_2 \oplus a_3 = 1 \Rightarrow a_{123} = 1$ \\ 
         \hline
     \end{tabular}
 \end{center}
@@ -489,19 +491,19 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
         \hline
         0 & 0 & 0 & 1 & $a_0 = 1$ \\ 
         \hline
-        0 & 0 & 1 & 1 & $a_0 + a_3 = 1 \Rightarrow a_3 = 0$ \\ 
+        0 & 0 & 1 & 1 & $a_0 \oplus a_3 = 1 \Rightarrow a_3 = 0$ \\ 
         \hline
-        0 & 1 & 0 & 1 & $a_0 + a_2 = 1 \Rightarrow a_2 = 0$ \\ 
+        0 & 1 & 0 & 1 & $a_0 \oplus a_2 = 1 \Rightarrow a_2 = 0$ \\ 
         \hline
-        0 & 1 & 1 & 1 & $a_0 + a_{23} + a_2 + a_3 = 1 \Rightarrow a_{23} = 0$ \\ 
+        0 & 1 & 1 & 1 & $a_0 \oplus a_{23} \oplus a_2 \oplus a_3 = 1 \Rightarrow a_{23} = 0$ \\ 
         \hline
-        1 & 0 & 0 & 1 & $a_0 + a_1 = 1 \Rightarrow a_1 = 0$ \\ 
+        1 & 0 & 0 & 1 & $a_0 \oplus a_1 = 1 \Rightarrow a_1 = 0$ \\ 
         \hline
-        1 & 0 & 1 & 1 & $a_0 + a_{13} + a_1 + a_3 = 1 \Rightarrow a_{13} = 0$ \\ 
+        1 & 0 & 1 & 1 & $a_0 \oplus a_{13} \oplus a_1 \oplus a_3 = 1 \Rightarrow a_{13} = 0$ \\ 
         \hline
-        1 & 1 & 0 & 0 & $a_0 + a_{12} + a_1 + a_2 = 0 \Rightarrow a_{12} = 1$ \\ 
+        1 & 1 & 0 & 0 & $a_0 \oplus a_{12} \oplus a_1 \oplus a_2 = 0 \Rightarrow a_{12} = 1$ \\ 
         \hline
-        1 & 1 & 1 & 0 & $a_0 + a_{123} + a_{12} + + a_{13} + a_{23} + a_1 + a_2 + a_3 = 0 \Rightarrow a_{123} = 0$ \\ 
+        1 & 1 & 1 & 0 & $a_0 \oplus a_{123} \oplus a_{12} \oplus a_{13} \oplus a_{23} \oplus a_1 \oplus a_2 \oplus a_3 = 0 \Rightarrow a_{123} = 0$ \\ 
         \hline
     \end{tabular}
 \end{center}
@@ -550,7 +552,7 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
 ""\newline
 \noindent$\neg(\neg(\neg B \vee C) \rightarrow (\neg A \vee C)) \equiv (A \& (B \& \neg C))$.
 ""\newline\newline
-\noindentПреобразуем исходное высказывание: $\neg(\neg(B \rightarrow C) \rightarrow (A \rightarrow C)) \equiv (A \& (B \& \neg C))$.
+\noindentПреобразуем исходное высказывание: $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (A \rightarrow C)) \equiv (A \& (B \& \neg C))$.
 ""\newline\newline
 \noindentСначала докажем правило отрицания импликации: $\neg (A \rightarrow B) \vdash A \& \neg B$. Т.к. в левой части стоит внешнее отрицание и ее не удобно использовать в качестве гипотезы, по прибегнем к контрапозиции, то есть выведем отрицание левой части из отрицания правой: $\neg (A \& \neg B) \vdash \neg \neg (A \rightarrow B)$.
 \begin{center}
@@ -572,27 +574,29 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
         \hline
     \end{tabular}
 \end{center}
-\noindentОбозначим правило отрицание импликации - $R10$.
+\noindentОбозначим правило отрицания импликации - $R10$.
 \begin{center}
     \begin{tabular}{| c | c | c |} 
         \hline
         Шаг & Формула & Комментарий \\ [0.5ex] 
         \hline
-        $1$ & $\neg(\neg(B \rightarrow C) \rightarrow (A \rightarrow C))$ & Гипотеза \\ [0.5ex] 
+        $1$ & $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (A \rightarrow C))$ & Гипотеза \\ [0.5ex] 
         \hline
-        $2$ & $\neg (B \rightarrow C) \& \neg (A \rightarrow C)$ & Правило Де Моргана (отрицание дизъюнкции) \\ [0.5ex] 
+        $2$ & $\neg (\neg \neg B \rightarrow C) \& \neg (A \rightarrow C)$ & Правило Де Моргана (отрицание дизъюнкции) \\ [0.5ex] 
         \hline
-        $3$ & $\neg (B \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
+        $3$ & $\neg (\neg \neg B \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
         \hline
         $4$ & $\neg (A \rightarrow C)$ & Свойство конъюнкции (2) \\ [0.5ex] 
         \hline
-        $5$ & $B \& \neg C$ & $R10 (3)$ \\ [0.5ex] 
+        $5$ & $\neg \neg B \& \neg C$ & $R10 (3)$ \\ [0.5ex] 
         \hline
-        $6$ & $A \& \neg C$ & $R10 (4)$ \\ [0.5ex] 
+        $6$ & $\neg \neg B \equiv B$ & Эквивалентность $\neg A \equiv A$, где $A = B$  \\ [0.5ex] 
         \hline
-        $7$ & $\neg C$ & Свойство конъюнкции (6) \\ [0.5ex] 
+        $7$ & $A \& \neg C$ & $R10 (4)$ \\ [0.5ex] 
         \hline
-        $8$ & $(A \& (B \& \neg C))$ & Свойство конъюнкции (5) и (7) \\ [0.5ex] 
+        $8$ & $\neg C$ & Свойство конъюнкции (6) \\ [0.5ex] 
+        \hline
+        $9$ & $(A \& (B \& \neg C))$ & Свойство конъюнкции (5) и (7) \\ [0.5ex] 
         \hline
     \end{tabular}
 \end{center}
@@ -610,17 +614,19 @@ $w(x_1, x_2, x_3) = a_{123}x_1x_2x_3 \oplus a_{12}x_1x_2 \oplus a_{23}x_2x_3 \op
         \hline
         $4$ & $B$ & Свойство конъюнкции (3) \\ [0.5ex]
         \hline
-        $5$ & $\neg C$ & Свойство конъюнкции (3) \\ [0.5ex]
+        $5$ & $B \equiv \neg \neg B$ & Эквивалентность $A \equiv \neg \neg A$, где $A = B$  \\ [0.5ex]
         \hline
-        $6$ & $\neg C \& A$ & Свойство конъюнкции (3) и (5) \\ [0.5ex]
+        $6$ & $\neg C$ & Свойство конъюнкции (3) \\ [0.5ex]
         \hline
-        $7$ & $\neg (B \rightarrow C)$ & $R8 (4, 5)$) \\ [0.5ex]
+        $7$ & $\neg C \& A$ & Свойство конъюнкции (3) и (5) \\ [0.5ex]
         \hline
-        $8$ & $\neg (A \rightarrow C)$ & $R10 (6)$) \\ [0.5ex]
+        $8$ & $\neg (\neg \neg B \rightarrow C)$ & $R8 (4, 5)$) \\ [0.5ex]
         \hline
-        $9$ & $\neg (B \rightarrow C) \& \neg (A \rightarrow C)$ & Свойство конъюнкции (7) и (8) \\ [0.5ex]
+        $9$ & $\neg (A \rightarrow C)$ & $R10 (6)$) \\ [0.5ex]
         \hline
-        $10$ & $\neg(\neg(B \rightarrow C) \rightarrow (A \rightarrow C))$ & $R10(9)$ \\ [0.5ex]
+        $10$ & $\neg (\neg \neg B \rightarrow C) \& \neg (A \rightarrow C)$ & Свойство конъюнкции (7) и (8) \\ [0.5ex]
+        \hline
+        $11$ & $\neg(\neg(\neg \neg B \rightarrow C) \rightarrow (A \rightarrow C))$ & $R10(9)$ \\ [0.5ex]
         \hline
     \end{tabular}
 \end{center}
